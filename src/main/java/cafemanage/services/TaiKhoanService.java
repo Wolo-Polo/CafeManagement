@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import cafemanage.entities.TaiKhoan;
@@ -15,6 +16,8 @@ import cafemanage.repositories.TaiKhoanReps;
 public class TaiKhoanService implements UserDetailsService{
 	@Autowired
 	private TaiKhoanReps taiKhoanReps;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public List<TaiKhoan> getListTaiKhoan(){
 		return taiKhoanReps.findAll();
@@ -25,6 +28,7 @@ public class TaiKhoanService implements UserDetailsService{
 	}
 	
 	public TaiKhoan addTaiKhoan(TaiKhoan taiKhoan) {
+		taiKhoan.setPassword(passwordEncoder.encode(taiKhoan.getPassword()));
 		return taiKhoanReps.save(taiKhoan);
 	}
 	
