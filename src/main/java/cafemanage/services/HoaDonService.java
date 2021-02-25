@@ -17,7 +17,7 @@ public class HoaDonService {
 		return hoaDonReps.findAll();
 	}
 	
-	public HoaDon getHoaDonById(String id){
+	public HoaDon getHoaDonById(Integer id){
 		return hoaDonReps.findById(id).get();
 	}
 	
@@ -33,7 +33,7 @@ public class HoaDonService {
 		return hoaDonReps.save(hoaDon);
 	}
 	
-	public boolean deleteHoaDon(String id) {
+	public boolean deleteHoaDon(Integer id) {
 		hoaDonReps.deleteById(id);
 		return true;
 	}

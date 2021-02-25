@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,8 +23,9 @@ import lombok.Data;
 @Table(name = "monan")
 public class MonAn {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "mamonan")
-	private String maMonAn;
+	private Integer maMonAn;
 	@Column(name = "tenmonan")
 	private String tenMonAn;
 	@Column(name = "hinhanh")

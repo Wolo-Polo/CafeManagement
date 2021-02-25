@@ -17,7 +17,7 @@ public class BanController {
 	private BanService banService;
 	
 	@RequestMapping(path = "api/staff/ban/{id}", method = {RequestMethod.POST, RequestMethod.PUT})
-	public ResponseEntity<?> setupBan(@PathVariable(name = "id") String id, @RequestParam(name = "tinhtrang", defaultValue = "blank") String tinhtrang) {
+	public ResponseEntity<?> setupBan(@PathVariable(name = "id") Integer id, @RequestParam(name = "tinhtrang", defaultValue = "blank") String tinhtrang) {
 		boolean status = banService.bookBan(id, tinhtrang);
 		if(status) {
 			return ResponseEntity.ok().build();

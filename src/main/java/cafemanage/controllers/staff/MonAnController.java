@@ -16,8 +16,8 @@ public class MonAnController {
 	private MonAnService monAnService;
 	
 	@GetMapping(path = "/api/staff/monan")
-	public List<MonAn> getAllMonAn(@RequestParam(name = "loaimon", defaultValue = "all") String idLoaiMon) {
-		if(idLoaiMon.equals("all")) {
+	public List<MonAn> getAllMonAn(@RequestParam(name = "loaimon", defaultValue = "-1") Integer idLoaiMon) {
+		if(idLoaiMon == -1) {
 			return monAnService.getListMonAn();			
 		}else {
 			return monAnService.getMonAnByLoaiMon(idLoaiMon);

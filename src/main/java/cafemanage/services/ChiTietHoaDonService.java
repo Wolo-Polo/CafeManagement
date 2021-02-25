@@ -17,7 +17,7 @@ public class ChiTietHoaDonService {
 		return chiTietHoaDonReps.findAll();
 	}
 	
-	public ChiTietHoaDon getChiTietHoaDonById(String id){
+	public ChiTietHoaDon getChiTietHoaDonById(Integer id){
 		return chiTietHoaDonReps.findById(id).get();
 	}
 	
@@ -29,7 +29,7 @@ public class ChiTietHoaDonService {
 		return chiTietHoaDonReps.save(chiTietHoaDon);
 	}
 	
-	public boolean deleteChiTietHoaDon(String id) {
+	public boolean deleteChiTietHoaDon(Integer id) {
 		chiTietHoaDonReps.deleteById(id);
 		return true;
 	}

@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import cafemanage.entities.ChiTietHoaDon;
 @Repository
-public interface ChiTietHoaDonReps extends JpaRepository<ChiTietHoaDon, String>{
+public interface ChiTietHoaDonReps extends JpaRepository<ChiTietHoaDon, Integer>{
 
 }

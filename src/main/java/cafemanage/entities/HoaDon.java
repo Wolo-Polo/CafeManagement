@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,11 +23,14 @@ import lombok.Data;
 @Table(name = "hoadon")
 public class HoaDon {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "mahoadon")
-	private String maHoaDon;
+	private Integer maHoaDon;
 	@ManyToOne
 	@JoinColumn(name = "maban")
 	private Ban ban;
+	@Column(name = "tennhanvien")
+	private String tenNhanVien;
 	@Column(name = "thoigian")
 	private Timestamp thoiGian;
 	@Column(name = "tongtien")

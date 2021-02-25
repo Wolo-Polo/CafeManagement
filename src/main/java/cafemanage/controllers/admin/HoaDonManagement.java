@@ -28,7 +28,7 @@ public class HoaDonManagement {
 		return result;
 	}
 	@GetMapping("/api/admin/hoadon/{id}")
-	public HoaDon getHoaDonById(@PathVariable(name = "id") String id){
+	public HoaDon getHoaDonById(@PathVariable(name = "id") Integer id){
 		return hoaDonService.getHoaDonById(id);
 	}
 	
@@ -47,7 +47,7 @@ public class HoaDonManagement {
 	}
 	
 	@DeleteMapping("/api/admin/hoadon/{id}")
-	public ResponseEntity<?> deleteHoaDon(@PathVariable(name = "id") String id) {
+	public ResponseEntity<?> deleteHoaDon(@PathVariable(name = "id") Integer id) {
 		if(hoaDonService.deleteHoaDon(id)) {
 			return ResponseEntity.ok().build();			
 		}else {

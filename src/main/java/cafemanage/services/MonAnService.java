@@ -18,10 +18,10 @@ public class MonAnService {
 		return monAnReps.findAll();
 	}
 	
-	public MonAn getMonAnById(String id){
+	public MonAn getMonAnById(Integer id){
 		return monAnReps.findById(id).get();
 	}
-	public List<MonAn> getMonAnByLoaiMon(String idLoaiMon) {
+	public List<MonAn> getMonAnByLoaiMon(Integer idLoaiMon) {
 		LoaiMon loaiMon = new LoaiMon();
 		loaiMon.setMaLoaiMon(idLoaiMon);
 		return monAnReps.findByLoaiMon(loaiMon);
@@ -35,7 +35,7 @@ public class MonAnService {
 		return monAnReps.save(monAn);
 	}
 	
-	public boolean deleteMonAn(String id) {
+	public boolean deleteMonAn(Integer id) {
 		monAnReps.deleteById(id);
 		return true;
 	}

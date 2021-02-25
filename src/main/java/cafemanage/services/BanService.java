@@ -17,7 +17,7 @@ public class BanService {
 		return banReps.findAll();
 	}
 	
-	public Ban getBanById(String id){
+	public Ban getBanById(Integer id){
 		return banReps.findById(id).get();
 	}
 	
@@ -29,12 +29,12 @@ public class BanService {
 		return banReps.save(ban);
 	}
 	
-	public boolean deleteBan(String id) {
+	public boolean deleteBan(Integer id) {
 		banReps.deleteById(id);
 		return true;
 	}
 	
-	public boolean bookBan(String maBan, String tinhTrang) {
+	public boolean bookBan(Integer maBan, String tinhTrang) {
 		Ban ban = banReps.findById(maBan).get();
 		
 		if(tinhTrang.equals("blank")) {

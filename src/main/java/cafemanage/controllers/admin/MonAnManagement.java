@@ -27,7 +27,7 @@ public class MonAnManagement {
 		return result;
 	}
 	@GetMapping("/api/admin/monan/{id}")
-	public MonAn getMonAnById(@PathVariable(name = "id") String id){
+	public MonAn getMonAnById(@PathVariable(name = "id") Integer id){
 		return monAnService.getMonAnById(id);
 	}
 	
@@ -42,7 +42,7 @@ public class MonAnManagement {
 	}
 	
 	@DeleteMapping("/api/admin/monan/{id}")
-	public ResponseEntity<?> deleteMonAn(@PathVariable(name = "id") String id) {
+	public ResponseEntity<?> deleteMonAn(@PathVariable(name = "id") Integer id) {
 		if(monAnService.deleteMonAn(id)) {
 			return ResponseEntity.ok().build();			
 		}else {

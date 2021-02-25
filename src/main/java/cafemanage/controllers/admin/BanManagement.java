@@ -27,7 +27,7 @@ public class BanManagement {
 		return result;
 	}
 	@GetMapping("/api/admin/ban/{id}")
-	public Ban getBanById(@PathVariable(name = "id") String id){
+	public Ban getBanById(@PathVariable(name = "id") Integer id){
 		return banService.getBanById(id);
 	}
 	
@@ -42,7 +42,7 @@ public class BanManagement {
 	}
 	
 	@DeleteMapping("/api/admin/ban/{id}")
-	public ResponseEntity<?> deleteBan(@PathVariable(name = "id") String id) {
+	public ResponseEntity<?> deleteBan(@PathVariable(name = "id") Integer id) {
 		if(banService.deleteBan(id)) {
 			return ResponseEntity.ok().build();			
 		}else {

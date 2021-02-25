@@ -9,7 +9,7 @@ import cafemanage.entities.LoaiMon;
 import cafemanage.entities.MonAn;
 
 @Repository
-public interface MonAnReps extends JpaRepository<MonAn, String>{
+public interface MonAnReps extends JpaRepository<MonAn, Integer>{
 	List<MonAn> findByLoaiMon(LoaiMon loaiMon);
 	
 }

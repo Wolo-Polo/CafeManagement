@@ -27,7 +27,7 @@ public class LoaiMonManagement {
 		return result;
 	}
 	@GetMapping("/api/admin/loaimon/{id}")
-	public LoaiMon getLoaiMonById(@PathVariable(name = "id") String id){
+	public LoaiMon getLoaiMonById(@PathVariable(name = "id") Integer id){
 		return loaiMonService.getLoaiMonById(id);
 	}
 	
@@ -42,7 +42,7 @@ public class LoaiMonManagement {
 	}
 	
 	@DeleteMapping("/api/admin/loaimon/{id}")
-	public ResponseEntity<?> deleteLoaiMon(@PathVariable(name = "id") String id) {
+	public ResponseEntity<?> deleteLoaiMon(@PathVariable(name = "id") Integer id) {
 		if(loaiMonService.deleteLoaiMon(id)) {
 			return ResponseEntity.ok().build();			
 		}else {

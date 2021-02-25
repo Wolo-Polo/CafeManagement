@@ -17,7 +17,7 @@ public class LoaiMonService {
 		return loaiMonReps.findAll();
 	}
 	
-	public LoaiMon getLoaiMonById(String id){
+	public LoaiMon getLoaiMonById(Integer id){
 		return loaiMonReps.findById(id).get();
 	}
 	
@@ -29,7 +29,7 @@ public class LoaiMonService {
 		return loaiMonReps.save(loaiMon);
 	}
 	
-	public boolean deleteLoaiMon(String id) {
+	public boolean deleteLoaiMon(Integer id) {
 		loaiMonReps.deleteById(id);
 		return true;
 	}

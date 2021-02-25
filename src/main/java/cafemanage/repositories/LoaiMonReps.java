@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import cafemanage.entities.LoaiMon;
 @Repository
-public interface LoaiMonReps extends JpaRepository<LoaiMon, String>{
+public interface LoaiMonReps extends JpaRepository<LoaiMon, Integer>{
 
 }
