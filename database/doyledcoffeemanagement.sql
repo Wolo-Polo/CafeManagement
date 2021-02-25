@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 23, 2021 lúc 06:37 AM
+-- Thời gian đã tạo: Th2 25, 2021 lúc 03:32 PM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.2.27
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ban` (
-  `MaBan` varchar(6) NOT NULL,
-  `TenBan` varchar(2) DEFAULT NULL,
+  `MaBan` int(11) NOT NULL,
+  `MoTa` varchar(2) DEFAULT NULL,
   `TinhTrang` varchar(10) NOT NULL,
   `GhiChu` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -39,9 +39,8 @@ CREATE TABLE `ban` (
 -- Đang đổ dữ liệu cho bảng `ban`
 --
 
-INSERT INTO `ban` (`MaBan`, `TenBan`, `TinhTrang`, `GhiChu`) VALUES
-('ban01', '01', 'blank', 'trống'),
-('ban02', '02', 'blank', 'trống');
+INSERT INTO `ban` (`MaBan`, `MoTa`, `TinhTrang`, `GhiChu`) VALUES
+(3, '01', 'blank', 'quần què');
 
 -- --------------------------------------------------------
 
@@ -51,8 +50,8 @@ INSERT INTO `ban` (`MaBan`, `TenBan`, `TinhTrang`, `GhiChu`) VALUES
 
 CREATE TABLE `cthoadon` (
   `MaCTHoaDon` int(11) NOT NULL,
-  `MaHoaDon` varchar(8) NOT NULL,
-  `MaMonAn` varchar(6) NOT NULL,
+  `MaHoaDon` int(11) NOT NULL,
+  `MaMonAn` int(11) NOT NULL,
   `SoLuong` smallint(6) DEFAULT NULL CHECK (`SoLuong` >= 0),
   `DonGia` decimal(10,2) DEFAULT NULL CHECK (`DonGia` >= 0),
   `GhiChu` varchar(255) DEFAULT NULL
@@ -63,20 +62,7 @@ CREATE TABLE `cthoadon` (
 --
 
 INSERT INTO `cthoadon` (`MaCTHoaDon`, `MaHoaDon`, `MaMonAn`, `SoLuong`, `DonGia`, `GhiChu`) VALUES
-(1, 'HD01', 'Mon01', 2, '10000.00', 'test nhé'),
-(2, 'HD01', 'Mon02', 3, '20000.00', 'đâsdasdasdasd'),
-(3, 'HD02', 'Mon01', 5, '10000.00', 'cùng 1 bàn'),
-(4, 'HD02', 'Mon02', 1, '20000.00', 'lẻ'),
-(5, 'HD02', 'Mon01', 5, '10000.00', 'cùng 1 bàn'),
-(6, 'HD02', 'Mon02', 1, '20000.00', 'lẻ'),
-(7, 'HD03', 'Mon01', 2, '10000.00', 'gg :V'),
-(8, 'HD03', 'Mon02', 1, '20000.00', 'test thôi mà :V'),
-(9, 'HD03', 'Mon01', 2, '10000.00', 'ff :V'),
-(10, 'HD03', 'Mon02', 1, '20000.00', 'test thôi mà :V'),
-(11, 'HD03', 'Mon01', 2, '10000.00', 'ff :V'),
-(12, 'HD03', 'Mon02', 8, '20000.00', 'test thôi mà :V'),
-(13, 'HD04', 'Mon01', 2, '10000.00', 'ádasdasdasdasdgg :V'),
-(14, 'HD04', 'Mon02', 1, '20000.00', '22222sdasdastest thôi mà :V');
+(15, 5, 4, 2, '10000.00', 'gg :V');
 
 -- --------------------------------------------------------
 
@@ -85,8 +71,9 @@ INSERT INTO `cthoadon` (`MaCTHoaDon`, `MaHoaDon`, `MaMonAn`, `SoLuong`, `DonGia`
 --
 
 CREATE TABLE `hoadon` (
-  `MaHoaDon` varchar(8) NOT NULL,
-  `MaBan` varchar(6) DEFAULT NULL,
+  `MaHoaDon` int(11) NOT NULL,
+  `MaBan` int(11) DEFAULT NULL,
+  `TenNhanVien` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ThoiGian` datetime DEFAULT NULL,
   `TongTien` decimal(10,2) DEFAULT NULL CHECK (`TongTien` >= 0),
   `DaThanhToan` tinyint(1) DEFAULT 0
@@ -96,11 +83,8 @@ CREATE TABLE `hoadon` (
 -- Đang đổ dữ liệu cho bảng `hoadon`
 --
 
-INSERT INTO `hoadon` (`MaHoaDon`, `MaBan`, `ThoiGian`, `TongTien`, `DaThanhToan`) VALUES
-('HD01', 'ban01', '2021-02-18 20:23:18', NULL, 0),
-('HD02', 'ban01', '2021-02-18 20:23:18', NULL, 0),
-('HD03', 'ban01', '2021-02-18 20:23:18', NULL, 0),
-('HD04', 'ban01', '2021-02-18 20:23:18', NULL, 0);
+INSERT INTO `hoadon` (`MaHoaDon`, `MaBan`, `TenNhanVien`, `ThoiGian`, `TongTien`, `DaThanhToan`) VALUES
+(5, 3, NULL, '2021-02-18 20:23:18', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -109,7 +93,7 @@ INSERT INTO `hoadon` (`MaHoaDon`, `MaBan`, `ThoiGian`, `TongTien`, `DaThanhToan`
 --
 
 CREATE TABLE `loaimon` (
-  `MaLoaiMon` varchar(5) NOT NULL,
+  `MaLoaiMon` int(11) NOT NULL,
   `TenLoaiMon` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -118,8 +102,7 @@ CREATE TABLE `loaimon` (
 --
 
 INSERT INTO `loaimon` (`MaLoaiMon`, `TenLoaiMon`) VALUES
-('Loai1', 'Món ăn test'),
-('Loai2', 'Món ăn test thứ 2');
+(4, 'Món ăn test thuứ 1');
 
 -- --------------------------------------------------------
 
@@ -128,11 +111,11 @@ INSERT INTO `loaimon` (`MaLoaiMon`, `TenLoaiMon`) VALUES
 --
 
 CREATE TABLE `monan` (
-  `MaMonAn` varchar(6) NOT NULL,
+  `MaMonAn` int(11) NOT NULL,
   `TenMonAn` varchar(255) DEFAULT NULL,
   `HinhAnh` varchar(255) DEFAULT NULL,
   `DonGia` decimal(10,2) DEFAULT NULL CHECK (`DonGia` >= 0),
-  `MaLoaiMon` varchar(5) DEFAULT NULL
+  `MaLoaiMon` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -140,9 +123,7 @@ CREATE TABLE `monan` (
 --
 
 INSERT INTO `monan` (`MaMonAn`, `TenMonAn`, `HinhAnh`, `DonGia`, `MaLoaiMon`) VALUES
-('Mon01', 'Món ăn này dùng để test', 'dell có', '2043000.00', 'Loai1'),
-('Mon02', 'test thứ 2', 'dell có luôn nhé :V', '20000.00', 'Loai1'),
-('Mon03', 'test test test', 'dell có để test', '12300.00', 'Loai2');
+(4, 'test test test', 'dell có để test', '12300.00', 4);
 
 -- --------------------------------------------------------
 
@@ -182,8 +163,8 @@ ALTER TABLE `ban`
 --
 ALTER TABLE `cthoadon`
   ADD PRIMARY KEY (`MaCTHoaDon`) USING BTREE,
-  ADD KEY `fk_monan` (`MaMonAn`),
-  ADD KEY `fk_hoadon` (`MaHoaDon`);
+  ADD KEY `fk_hoadon` (`MaHoaDon`),
+  ADD KEY `fk_monan` (`MaMonAn`);
 
 --
 -- Chỉ mục cho bảng `hoadon`
@@ -216,10 +197,34 @@ ALTER TABLE `taikhoan`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `ban`
+--
+ALTER TABLE `ban`
+  MODIFY `MaBan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT cho bảng `cthoadon`
 --
 ALTER TABLE `cthoadon`
-  MODIFY `MaCTHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `MaCTHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  MODIFY `MaHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `loaimon`
+--
+ALTER TABLE `loaimon`
+  MODIFY `MaLoaiMon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `monan`
+--
+ALTER TABLE `monan`
+  MODIFY `MaMonAn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
