@@ -20,16 +20,17 @@ import cafemanage.jwt.JWTAuthFilter;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
+	@Autowired
+	private JWTAuthFilter jwtAuthFilter;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 			.authorizeRequests()
 			.antMatchers("/api/login").permitAll()
-			.antMatchers("/api/staff/*").hasAnyAuthority("ADMIN", "STAFF")
-			.antMatchers("/api/admin/*").hasAnyAuthority("ADMIN")	//chỉ cho user có role là admin với những api có path là /api/admin
+			.antMatchers("/api/staff/**").hasAnyAuthority("ADMIN", "STAFF")
+			.antMatchers("/api/admin/**").hasAnyAuthority("ADMIN")	//chỉ cho user có role là admin với những api có path là /api/admin
 			.and()
-			.addFilterBefore(new JWTAuthFilter(), UsernamePasswordAuthenticationFilter.class).authorizeRequests();
+			.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).authorizeRequests();
 		
 	}
 	
