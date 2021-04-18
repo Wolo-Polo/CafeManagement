@@ -17,4 +17,9 @@ public class ThongKeService {
 		List<DoanhSo> ds = thongKeReps.thongKe(nam);
 		return ds;
 	}
+	
+	public DoanhSo thongKe(String fromDate, String toDate){
+		DoanhSo ds = thongKeReps.thongKe(fromDate, toDate);
+		return ds;
+	}
 }

@@ -12,5 +12,6 @@ public class DoanhSo {
 	private Integer id;
 	private Integer thang;
 	private Integer soluonghoadon;
+	private Integer soluongcoc;
 	private Double doanhthu;
 }

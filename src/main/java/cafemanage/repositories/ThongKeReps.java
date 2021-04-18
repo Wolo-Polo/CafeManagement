@@ -17,4 +17,10 @@ public interface ThongKeReps extends JpaRepository<DoanhSo, Integer>{
 			" where dathanhtoan = 1 and year(thoigian) = ?1" + 
 			" group by thang")
 	List<DoanhSo> thongKe(Integer nam);
+
+	@Query(nativeQuery = true, 
+			value = "select hoadon.mahoadon as id, month(thoigian) as thang, count(hoadon.mahoadon) as soluonghoadon, SUM(tongtien) as doanhthu, SUM(soluong) as soluongcoc "
+					+ "from hoadon inner join cthoadon on hoadon.MaHoaDon = cthoadon.MaHoaDon "
+					+ "where dathanhtoan = 1 and thoigian between ?1 and ?2")
+	DoanhSo thongKe(String fromDate, String toDate);
 }
