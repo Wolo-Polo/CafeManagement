@@ -23,4 +23,6 @@ public interface ThongKeReps extends JpaRepository<DoanhSo, Integer>{
 					+ "from hoadon inner join cthoadon on hoadon.MaHoaDon = cthoadon.MaHoaDon "
 					+ "where dathanhtoan = 1 and thoigian between ?1 and ?2")
 	DoanhSo thongKe(String fromDate, String toDate);
+	
+	
 }

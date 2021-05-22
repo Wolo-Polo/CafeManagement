@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ping</title>
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	<script src="/stomp.min.js"></script>
+</head>
+<body>
+<div>
+	<input type="button" id="btnPing" value="Ping" onclick="connect()">
+</div>
+
+<script>
+var stompClient = null;
+
+function connect() {
+    var socket = new SockJS('/notification');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        //setConnected(true);
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/notification/ping', function (greeting) {
+            alert(greeting.body);
+        });
+        
+        stompClient.send("/app/notification", {}, {});
+    });
+}
+</script>
+
+</body>
+</html>

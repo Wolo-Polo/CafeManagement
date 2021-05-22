@@ -1,6 +1,7 @@
 package cafemanage.controllers.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,5 +27,11 @@ public class ThongKe {
 	public DoanhSo thongKeDoanhThu(@RequestParam("from") String from, @RequestParam("to") String to){
 		
 		return thongKeService.thongKe(from, to);
+	}
+	
+	@GetMapping("/api/admin/thongke/all")
+	public Map<String, Object> thongKe(@RequestParam("from") String from, @RequestParam("to") String to){
+		
+		return thongKeService.thongKeTatCa(from, to);
 	}
 }
