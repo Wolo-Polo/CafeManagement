@@ -39,7 +39,7 @@ public class ThongKeService {
 		result.put("soLuongMon", thongKeSoLuongMon);
 		
 		List<Map<String, Object>> thongKeDoanhSoCuaNhanVien = thongKeDao.thongKeDoanhSoCuaNhanVien(fromDate, toDate);
-		result.put("doanhSoCuaNhanVien", thongKeSoLuongMon);
+		result.put("doanhSoCuaNhanVien", thongKeDoanhSoCuaNhanVien);
 		
 		return result;
 	}
