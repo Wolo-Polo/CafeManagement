@@ -35,10 +35,10 @@ public class ThongKeService {
 		result.put("from", fromDate);
 		result.put("to", toDate);
 		
-		Map<String, Object> thongKeSoLuongMon = thongKeDao.thongKeSoLuongMoiMon(fromDate, toDate);
+		List<Map<String, Object>> thongKeSoLuongMon = thongKeDao.thongKeSoLuongMoiMon(fromDate, toDate);
 		result.put("soLuongMon", thongKeSoLuongMon);
 		
-		Map<String, Object> thongKeDoanhSoCuaNhanVien = thongKeDao.thongKeDoanhSoCuaNhanVien(fromDate, toDate);
+		List<Map<String, Object>> thongKeDoanhSoCuaNhanVien = thongKeDao.thongKeDoanhSoCuaNhanVien(fromDate, toDate);
 		result.put("doanhSoCuaNhanVien", thongKeSoLuongMon);
 		
 		return result;

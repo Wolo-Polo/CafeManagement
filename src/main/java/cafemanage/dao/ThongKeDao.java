@@ -1,6 +1,8 @@
 package cafemanage.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -14,8 +16,8 @@ public class ThongKeDao {
 	@Autowired
 	private EntityManager entityManager;
 	
-	public Map<String, Object> thongKeSoLuongMoiMon(String fromDate, String toDate){
-		Map<String, Object> mapResult = new HashMap<>();
+	public List<Map<String, Object>> thongKeSoLuongMoiMon(String fromDate, String toDate){
+		List<Map<String, Object>> result = new ArrayList<>();
 		
 		String sqlSoLuongMon = "select monan.mamonan, tenmonan, Count(monan.mamonan) as soluong " 
 								+ " from monan inner join cthoadon on monan.mamonan = cthoadon.mamonan " 
@@ -27,18 +29,19 @@ public class ThongKeDao {
 		querySoLuongMon.setParameter(1, fromDate);
 		querySoLuongMon.setParameter(2, toDate);
 		querySoLuongMon.getResultStream().forEach((record) -> {
-			mapResult.put("maMonAn", ((Object[]) record)[0]);
-			mapResult.put("tenMonAn", ((Object[]) record)[1]);
-			mapResult.put("soLuong", ((Object[]) record)[2]);
-			
+			Map<String, Object> recordResult = new HashMap<>();
+			recordResult.put("maMonAn", ((Object[]) record)[0]);
+			recordResult.put("tenMonAn", ((Object[]) record)[1]);
+			recordResult.put("soLuong", ((Object[]) record)[2]);
+			result.add(recordResult);
 		});
 		
 	
-		return mapResult;
+		return result;
 	}
 	
-	public Map<String, Object> thongKeDoanhSoCuaNhanVien(String fromDate, String toDate){
-		Map<String, Object> mapResult = new HashMap<>();
+	public List<Map<String, Object>> thongKeDoanhSoCuaNhanVien(String fromDate, String toDate){
+		List<Map<String, Object>> result = new ArrayList<>();
 		
 		String sqlSoLuongMon = "select tennhanvien, count(mahoadon) as sohoadon, sum(tongtien) as doanhthu "
 								+ " from hoadon "
@@ -48,14 +51,17 @@ public class ThongKeDao {
 		Query querySoLuongMon= entityManager.createNativeQuery(sqlSoLuongMon);
 		querySoLuongMon.setParameter(1, fromDate);
 		querySoLuongMon.setParameter(2, toDate);
+		
 		querySoLuongMon.getResultStream().forEach((record) -> {
-			mapResult.put("tenNhanVien", ((Object[]) record)[0]);
-			mapResult.put("soHoaDon", ((Object[]) record)[1]);
-			mapResult.put("doanhThu", ((Object[]) record)[2]);
+			Map<String, Object> recordResult = new HashMap<>();
+			recordResult.put("tenNhanVien", ((Object[]) record)[0]);
+			recordResult.put("soHoaDon", ((Object[]) record)[1]);
+			recordResult.put("doanhThu", ((Object[]) record)[2]);
 			
+			result.add(recordResult);
 		});
 		
 	
-		return mapResult;
+		return result;
 	}
 }
